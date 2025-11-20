@@ -1,0 +1,40 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+
+    <p-card header="Login" [style]="{width:'360px'}">
+        
+        <div class="field">
+            <input 
+                type="text"
+                pInputText
+                formControlName="usuario"
+                placeholder="Nombre de usuario" />
+            
+            <small style="color:red"
+                *ngIf="myForm.get('usuario')?.invalid && myForm.get('usuario')?.touched">
+                El usuario debe ser un correo electrónico válido.
+            </small>
+
+        </div>
+
+        <div class="field">
+            <input 
+                type="password"
+                pInputPassword
+                formControlName="password"
+                placeholder="Contraseña"/>
+
+            <small style="color:red"
+                *ngIf="myForm.get('password')?.invalid && myForm.get('password')?.touched">
+                La contraseña debe tener mínimo 8 caracteres.
+            </small>
+
+        </div>
+
+        <p-button type="submit" label="Iniciar sesión" styleClass="w-full"></p-button>
+
+        <p style="color: red; margin-top: 10px;">{{ errorMsg }}</p>
+
+        <div class="mt-2">¿No estás registrado? <a routerLink="/register">Registrarme</a></div>
+
+    </p-card>
+</form>

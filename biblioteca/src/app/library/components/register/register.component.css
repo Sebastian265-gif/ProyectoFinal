@@ -1,0 +1,66 @@
+/* Contenedor general del formulario */
+.form-container {
+  max-width: 420px;        /* Tamaño ideal de un formulario */
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ajuste visual de cada campo */
+.p-field {
+  margin-bottom: 18px;
+}
+
+/* Evita que los inputs cambien de tamaño */
+input[pInputText],
+p-calendar,
+p-dropdown {
+  width: 100%;
+}
+
+/* Input siempre del mismo tamaño */
+input[pInputText] {
+  height: 40px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+/* Calendario */
+:host ::ng-deep .p-calendar input {
+  height: 40px !important;
+  padding: 8px 12px;
+}
+
+/* Dropdown (género) */
+:host ::ng-deep .p-dropdown {
+  width: 100% !important;
+  height: 40px;
+}
+
+/* Mensajes de error */
+.p-error {
+  font-size: 13px;
+  color: #e50000;
+}
+
+/* Botón */
+button[pbutton] {
+  width: 100%;
+  height: 42px;
+  border-radius: 6px;
+}
+
+/* Eliminamos animaciones que agrandan contenedores */
+input,
+.p-dropdown,
+.p-calendar {
+  transition: none !important;
+}
+
+/* Para evitar que PrimeNG agrande el campo al hacer foco */
+:host ::ng-deep .p-inputtext:focus {
+  box-shadow: 0 0 4px #7da0ff !important;
+  transform: none !important;
+}

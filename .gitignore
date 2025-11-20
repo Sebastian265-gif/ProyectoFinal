@@ -1,0 +1,8 @@
+# Carpetas que nunca deben subirse
+**/.vs/
+**/bin/
+**/obj/
+node_modules/
+.env
+
+

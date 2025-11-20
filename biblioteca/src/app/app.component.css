@@ -1,0 +1,20 @@
+.principal {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr auto; /* header - contenido - footer */
+}
+
+/* Contenido normal del router-outlet */
+.contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ocupa el espacio de la fila central */
+}
+
+/* Ocultar visualmente header/footer solo en login */
+.hidden-login {
+    visibility: hidden;
+}
+
+

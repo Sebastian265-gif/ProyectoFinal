@@ -1,0 +1,26 @@
+<div class="books-container">
+  <div *ngFor="let book of books" class="book-card-wrapper">
+    <p-card [header]="book.tittle" [subheader]="book.author" class="book-card">
+      
+      <!-- Portada -->
+      <img *ngIf="book.cover" [src]="book.cover" alt="{{ book.tittle }}" class="book-cover"/>
+      <img *ngIf="!book.cover" src="assets/default-cover.png" alt="Sin portada" class="book-cover"/>
+
+      <!-- Información del libro -->
+      <div class="book-info">
+        <p><strong>ID:</strong> {{ book.id }}</p>
+        <p><strong>Editorial:</strong> {{ book.editorial }}</p>
+        <p><strong>Páginas:</strong> {{ book.pages }}</p>
+      </div>
+
+      <!-- Barra de progreso -->
+      <p-progressBar [value]="book.progress" [showValue]="true" [style]="{'height':'20px'}"></p-progressBar>
+
+      <!-- Acciones -->
+      <div class="book-actions">
+        <button pButton type="button" label="Editar" class="p-button-warning p-button-sm" (click)="gotoEdit(book.id)"></button>
+        <button pButton type="button" label="Eliminar" class="p-button-danger p-button-sm" (click)="gotoDelete(book.id)"></button>
+      </div>
+    </p-card>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* hasta 4 cartas por fila */
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-items: center; /* centra cada carta en su celda */
+}
+
+.book-card-wrapper {
+  width: 100%;
+  max-width: 280px; /* ancho máximo de cada carta */
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 450px; /* altura uniforme */
+  max-height: 450px; /* fuerza altura fija */
+  overflow: hidden; /* evita que el contenido rompa la altura */
+}
+
+.book-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.book-info {
+  flex-grow: 1; /* ocupa el espacio disponible */
+  margin-bottom: 0.5rem;
+}
+
+/* Recortar texto largo de manera uniforme */
+.book-info p,
+.book-card [p-header],
+.book-card [p-subheader] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* Webkit (Chrome, Safari) */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  /* Compatibilidad estándar */
+  display: box; 
+  box-orient: vertical;
+  line-clamp: 2; /* máximo 2 líneas */
+}
+
+.book-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+/* Responsive para pantallas más pequeñas */
+@media (max-width: 1200px) {
+  .books-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 cartas por fila */
+  }
+}
+
+@media (max-width: 900px) {
+  .books-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cartas por fila */
+  }
+}
+
+@media (max-width: 600px) {
+  .books-container {
+    grid-template-columns: 1fr; /* 1 carta por fila */
+  }
+}

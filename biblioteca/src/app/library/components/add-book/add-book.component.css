@@ -1,0 +1,11 @@
+.error {
+    color: red;
+    font-size: small;
+}
+.customizeButton {
+    background-color: #5A6C57;
+    border: none;
+}
+.customizeButton:hover{
+    background-color: #85A98F;
+}

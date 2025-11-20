@@ -1,0 +1,11 @@
+.field {
+  display: flex;
+  flex-direction: column;   /* coloca todo en columna */
+}
+
+.field small {
+  margin-top: 4px;
+  display: block;           /* fuerza que esté debajo */
+}
+
+

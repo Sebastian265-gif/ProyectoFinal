@@ -1,0 +1,43 @@
+/* ===== TUS ESTILOS ORIGINALES ===== */
+.header {
+    background-color: #85A98F;
+}
+
+.card {
+    filter: drop-shadow(
+        3px 2px 20px rgba(186, 183, 183, 0.8)
+    );
+}
+
+.hola {
+    filter: drop-shadow(
+        0 0 10px rgba(0, 0, 0, 0.8)
+    );
+}
+
+/* Botón hamburguesa */
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+/* Ocultar menú cuando se pulse el botón */
+.hidden-menu {
+    display: none !important;
+}
+
+/* Aumentar tamaño texto blanco de menú */
+.p-menubar .p-menuitem-link span {
+    font-size: 1.15rem;
+    color: white !important;
+}
+
+/* Forzar menú en una sola línea */
+.p-menubar-root-list {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px;
+}
