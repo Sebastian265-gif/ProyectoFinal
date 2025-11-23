@@ -1,12 +1,12 @@
 <div class="principal">
-  <!-- Header oculto solo visualmente en login -->
-  <app-header [class.hidden-login]="isLoginRoute()"></app-header>
+  <!-- Header oculto solo en login, register y landing -->
+  <app-header *ngIf="!isHiddenHeader()"></app-header>
 
   <!-- Contenido siempre ocupa el espacio del grid -->
   <div class="contenido flex justify-content-center align-items-center h-full">
     <router-outlet></router-outlet>
   </div>
 
-  <!-- Footer oculto solo visualmente en login -->
-  <app-footer [class.hidden-login]="isLoginRoute()"></app-footer>
+  <!-- Footer siempre visible -->
+  <app-footer></app-footer>
 </div>

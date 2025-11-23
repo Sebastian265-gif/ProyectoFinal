@@ -1,11 +1,123 @@
+/* ============================= */
+/* CONTENEDOR GENERAL */
+form {
+  max-width: 520px;
+  margin: 60px auto;
+  padding: 35px;
+  border-radius: 20px;
+
+  background: rgba(0, 59, 46, 0.10);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Animación al cargar */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ============================= */
+/* TÍTULO */
+form h1 {
+  text-align: center;
+  color: #003b2e;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* ============================= */
+/* CAMPOS DEL FORMULARIO */
+.field {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  color: #003b2e;
+  margin-bottom: 6px;
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+input[pInputText],
+input[type="file"],
+.dropdown-full .p-dropdown {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  color: #003b2e;
+  transition: 0.25s ease;
+}
+
+input[pInputText]:focus,
+.dropdown-full .p-dropdown:focus,
+input[type="file"]:focus {
+  border-color: #005f47;
+  box-shadow: 0 0 8px rgba(0, 95, 71, 0.35);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+input::placeholder {
+  color: #7a8a85;
+}
+
+/* ============================= */
+/* ERRORES */
 .error {
-    color: red;
-    font-size: small;
+  color: #b11226;
+  font-size: 0.85rem;
+  margin-top: 4px;
 }
+
+/* ============================= */
+/* BOTÓN AÑADIR / ACTUALIZAR */
 .customizeButton {
-    background-color: #5A6C57;
-    border: none;
+  width: 100%;
+  background: linear-gradient(135deg, #005f47, #008f5a) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 12px 0 !important;
+  border-radius: 12px !important;
+  border: none !important;
+  font-size: 1rem !important;
+  transition: 0.25s ease;
 }
-.customizeButton:hover{
-    background-color: #85A98F;
+
+.customizeButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* DESHABILITADO */
+button[disabled] {
+  background: #9bb3ac !important;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* IMAGEN DEL LIBRO */
+.book-cover {
+  max-width: 150px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+/* MENSAJES PRIMENG */
+.p-message {
+  margin-top: 12px;
 }

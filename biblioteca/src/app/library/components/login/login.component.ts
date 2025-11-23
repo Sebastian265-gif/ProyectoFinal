@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   errorMsg: string = '';
   loading: boolean = false;
 
+  // ruta de la imagen de fondo
+  backgroundImage = 'assets/images/login-bg.jpg';
+
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
@@ -61,7 +64,6 @@ export class LoginComponent implements OnInit {
 
         if (resp.success === true) {
 
-          // 🔥 GUARDAR TOKEN Y USER_ID
           localStorage.setItem("token", resp.token);
           localStorage.setItem("user_id", resp.userId.toString());
           localStorage.setItem("username", resp.username);

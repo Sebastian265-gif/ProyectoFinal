@@ -1,49 +1,83 @@
 <form [formGroup]="booksForm" (ngSubmit)="onSubmit()">
-    <div class="p-fluid">
-        <h1>AGREGAR LIBROS</h1>
-        <div class="field">
-            <label for="Id">ID</label>
-            <input placeholder="0000-0000" pInputText type="text" id="Id" class="text-base w-full" formControlName="Id"/>
-            <div class="error" *ngIf="booksForm.controls['Id'].invalid && booksForm.controls['Id'].touched">
-                El codigo del libro es necesario!
-            </div>
-        </div>
-        <div class="field">
-            <label for="tittle">Titulo</label>
-            <input placeholder="El principito" pInputText id="tittle" type="text" class="text-base w-full" formControlName="tittle"/>
-            <div class="error" *ngIf="booksForm.controls['tittle'].invalid && booksForm.controls['tittle'].touched">
-                El titulo del libro es necesario!
-            </div>
-        </div>
-        <div class="field">
-            <label for="author">Autor</label>
-            <input placeholder="Antoine de Saint-Exupéry" type="text" pInputText id="author" class="text-base w-full" formControlName="author"/>
-            <div class="error" *ngIf="booksForm.controls['author'].invalid && booksForm.controls['author'].touched">
-                El autor del libro es necesario!
-            </div>
-        </div>
-        <div class="field">
-            <label for="editorial">Editorial</label>
-            <input placeholder="Berenice" type="text" pInputText id="editorial" class="text-base w-full" formControlName="editorial"/>
-            <div class="error" *ngIf="booksForm.controls['editorial'].invalid && booksForm.controls['editorial'].touched">
-                El editorial del libro es necesario!
-            </div>
-        </div>
-        <div class="field">
-            <label for="pages">Numero de páginas</label>
-            <input placeholder="120" type="number" pInputText id="pages" class="text-base w-full" formControlName="pages"/>
-            <div class="error" *ngIf="booksForm.controls['pages'].invalid && booksForm.controls['pages'].touched">
-                El numero de paginas es necesario!
-            </div>
-        </div>
-        <div class="field">
-            <button pButton label="Añadir" class="customizeButton w-full" [disabled]="booksForm.invalid" type="submit"></button>
-            <div class="p-mt-3">
-                <p-message *ngIf="successMessage" severity="success" text="{{successMessage}}"></p-message>
-                <p-message *ngIf="errMessage" severity="error" text="{{errMessage}}"></p-message>
-            </div>
-        </div>
+  <div class="p-fluid">
+    <h1>AGREGAR LIBROS</h1>
+
+    <div class="field">
+      <label for="Id">ID</label>
+      <input placeholder="0000-0000" pInputText id="Id" type="text"
+        class="text-base w-full" formControlName="Id" />
+      <div class="error" *ngIf="booksForm.controls['Id'].invalid && booksForm.controls['Id'].touched">
+        El código del libro es necesario!
+      </div>
     </div>
+
+    <div class="field">
+      <label for="tittle">Titulo</label>
+      <input placeholder="El principito" pInputText id="tittle" type="text"
+        class="text-base w-full" formControlName="tittle" />
+      <div class="error" *ngIf="booksForm.controls['tittle'].invalid && booksForm.controls['tittle'].touched">
+        El título del libro es necesario!
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="author">Autor</label>
+      <input placeholder="Antoine de Saint-Exupéry" pInputText id="author" type="text"
+        class="text-base w-full" formControlName="author" />
+      <div class="error" *ngIf="booksForm.controls['author'].invalid && booksForm.controls['author'].touched">
+        El autor del libro es necesario!
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="genero">Género</label>
+      <p-dropdown id="genero" [options]="generos" formControlName="genero" placeholder="Seleccione un género"></p-dropdown>
+      <div class="error" *ngIf="booksForm.controls['genero'].invalid && booksForm.controls['genre'].touched">
+        El género es obligatorio!
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="editorial">Editorial</label>
+      <input placeholder="Berenice" pInputText id="editorial" type="text"
+        class="text-base w-full" formControlName="editorial" />
+      <div class="error" *ngIf="booksForm.controls['editorial'].invalid && booksForm.controls['editorial'].touched">
+        La editorial es necesaria!
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="pages">Número de páginas</label>
+      <input placeholder="120" pInputText id="pages" type="number"
+        class="text-base w-full" formControlName="pages" />
+      <div class="error" *ngIf="booksForm.controls['pages'].invalid && booksForm.controls['pages'].touched">
+        El número de páginas es necesario!
+      </div>
+    </div>
+
+    <!-- 🆕 Input para subir imagen -->
+    <div class="field">
+      <label for="cover">Portada del libro</label>
+      <input 
+      type="file" 
+      id="cover"
+      #fileInput 
+      (change)="onFileSelected($event)" 
+      accept="image/*" />
+      
+    </div>
+
+    <div class="field">
+      <button pButton label="Añadir" class="customizeButton w-full"
+        [disabled]="booksForm.invalid" type="submit"></button>
+
+      <div class="p-mt-3">
+        <p-message *ngIf="successMessage" severity="success" text="{{ successMessage }}"></p-message>
+        <p-message *ngIf="errMessage" severity="error" text="{{ errMessage }}"></p-message>
+      </div>
+    </div>
+
+  </div>
 </form>
 
 

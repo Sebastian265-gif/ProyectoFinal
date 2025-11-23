@@ -12,6 +12,7 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
 
   title = 'biblioteca';
@@ -21,8 +22,11 @@ export class AppComponent {
   isLoginRoute(): boolean {
     const url = this.router.url;
     return url.includes('/login') || url.includes('/register');
+  }
 
+  // 🔹 Método nuevo para ocultar el header en login, register y landing
+  isHiddenHeader(): boolean {
+    const url = this.router.url;
+    return url.includes('/login') || url.includes('/register') || url === '/' || url.includes('/landing');
   }
 }
-
-

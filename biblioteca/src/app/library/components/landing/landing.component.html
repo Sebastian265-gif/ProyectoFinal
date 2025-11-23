@@ -1,0 +1,49 @@
+<div class="landing-page">
+
+  <!-- Menú superior -->
+  <nav class="menu-bar">
+    <ul class="menu-list">
+      <li><a [routerLink]="['/']"><i class="fa fa-home"></i> Inicio</a></li>
+      <li><a href="#"><i class="fa fa-info-circle"></i> Acerca de</a></li>
+      <li><a href="#"><i class="fa fa-cogs"></i> Servicios</a></li>
+      <li><a href="#"><i class="fa fa-envelope"></i> Contacto</a></li>
+      <li>
+        <button [routerLink]="['/login']" class="login-btn-btn">
+          <i class="fa fa-user"></i> Iniciar Sesión
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Sección principal -->
+  <div class="landing-content">
+    <h1>Bienvenido a la Biblioteca Virtual</h1>
+    <p>Accede a tu colección de libros, administra tu progreso y descubre nuevas lecturas.</p>
+    <button [routerLink]="['/login']" class="landing-login-btn">Ingresar</button>
+  </div>
+
+  <app-footer class="footer-fixed"></app-footer>
+  
+  <div class="landing-features">
+    <div class="feature">
+      <i class="fa fa-book"></i>
+      <h3>Gestiona tus libros</h3>
+      <p>Agrega, actualiza o elimina libros fácilmente.</p>
+    </div>
+    <div class="feature">
+      <i class="fa fa-chart-line"></i>
+      <h3>Progreso de lectura</h3>
+      <p>Monitorea tu avance y retoma desde donde lo dejaste.</p>
+    </div>
+    <div class="feature">
+      <i class="fa fa-users"></i>
+      <h3>Comunidad</h3>
+      <p>Interactúa con otros usuarios y comparte recomendaciones.</p>
+    </div>
+  </div>
+
+  <div class="landing-illustration">
+    <img src="https://example.com/illustration.png" alt="Libros" />
+  </div>
+</div>
+

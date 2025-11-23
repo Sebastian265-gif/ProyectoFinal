@@ -8,13 +8,24 @@ import { BookService } from '../../services/book.service';
 import { CardModule } from 'primeng/card';
 import { DropdownModule } from 'primeng/dropdown';
 import { Router } from '@angular/router';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-search-id-book',
   standalone: true,
-  imports: [CommonModule,TableModule,ButtonModule,InputTextModule,FormsModule,ReactiveFormsModule, CardModule, DropdownModule],
+  imports: [
+    CommonModule,
+    TableModule,
+    ButtonModule,
+    InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CardModule,
+    DropdownModule,
+    ProgressBarModule
+  ],
   templateUrl: './search-id-book.component.html',
-  styleUrl: './search-id-book.component.css'
+  styleUrls: ['./search-id-book.component.css']
 })
 export class SearchIdBookComponent {
   Ids: any[] = [];
@@ -27,41 +38,53 @@ export class SearchIdBookComponent {
     this.loadIds();
   }
 
-  loadIds(): void{
+  loadIds(): void {
     this.BookService.idBooks().subscribe({
-      next: (Ids) => {this.Ids = Ids},
-      error: () => {this.errorMessage = "Error cargando IDS"}
-    })
+      next: (Ids) => { this.Ids = Ids; },
+      error: () => { this.errorMessage = "Error cargando IDS"; }
+    });
   }
 
-  searchIdBook():void{
+  searchIdBook(): void {
     if(!this.bookId){
       this.errorMessage = 'Por favor, ingresa un ID válido';
       return;
     }
 
     this.isLoading = true;
-
     this.BookService.getBookbyId(this.bookId).subscribe({
       next: (book) => {
-        this.books = book ? [book]: [];
-        this.errorMessage = this.books.length ? '':'No se encontro ninugn usuario con este Id';
+        if (book) {
+          const currentPage = book.current_page ?? 0;
+          const progress = book.pages > 0 ? Math.round((currentPage / book.pages) * 100) : 0;
+          const bookWithCover = {
+            ...book,
+            cover: book.cover ? 'https://localhost:7255' + book.cover : null,
+            progress: progress,
+            progressText: `${currentPage} / ${book.pages} páginas`
+          };
+          this.books = [bookWithCover];
+          this.errorMessage = '';
+        } else {
+          this.books = [];
+          this.errorMessage = 'No se encontró ningún libro con este ID';
+        }
       },
       error: () => {
-        this.errorMessage = 'Error al buscar el libro con el ID ingresado';
         this.books = [];
+        this.errorMessage = 'Error al buscar el libro con el ID ingresado';
       },
       complete: () => {
         this.isLoading = false;
       }
-    })
+    });
   }
 
-  gotoEdit(id: string): void{
+  gotoEdit(id: string): void {
     this.router.navigate(['/updatebook', id]);
   }
 
-  gotoDelete(id: string): void{
+  gotoDelete(id: string): void {
     this.router.navigate(['/deletebook', id]);
   }
 }

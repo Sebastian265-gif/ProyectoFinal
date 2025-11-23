@@ -1,23 +1,37 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BookService } from '../../services/book.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { BookService } from '../../services/book.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-books',
   standalone: true,
-  imports: [TableModule, CardModule, ButtonModule, ProgressBarModule, CommonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TableModule,
+    CardModule,
+    ButtonModule,
+    ProgressBarModule
+  ],
   templateUrl: './search-books.component.html',
   styleUrls: ['./search-books.component.css']
 })
 export class SearchBooksComponent implements OnInit {
+  allBooks: any[] = [];        // Todos los libros
+  displayedBooks: any[] = [];  // Libros que se muestran (filtrados)
+  selectedGenre: string = '';
 
-  books: any[] = [];
-  errorMessage: string = '';
+  genreOptions: any[] = [];
+
+  showProgressModal = false;
+  selectedBook: any = null;
+  newPage: number = 0;
 
   constructor(private bookService: BookService, private router: Router) {}
 
@@ -27,25 +41,75 @@ export class SearchBooksComponent implements OnInit {
 
   loadBooks(): void {
     this.bookService.listBooks().subscribe({
-      next: (books) => {
-        // Inicializamos progress y cover por si no existen
-        this.books = books.map(book => ({
-          ...book,
-          progress: book.progress || 0,
-          cover: book.cover || null
-        }));
+      next: books => {
+        const mappedBooks = books.map(book => {
+          const currentPage = book.current_page ?? 0;
+          return {
+            ...book,
+            currentPage: currentPage,
+            progress: book.pages > 0 ? Math.round((currentPage / book.pages) * 100) : 0,
+            cover: book.cover ? 'https://localhost:7255' + book.cover : null
+          };
+        });
+
+        this.allBooks = mappedBooks;
+        this.displayedBooks = [...this.allBooks]; // inicialmente todos
+
+        const uniqueGeneros = Array.from(new Set(mappedBooks.map(b => b.genero).filter(g => g)));
+        this.genreOptions = uniqueGeneros.map(g => ({ label: g, value: g }));
       },
-      error: () => {
-        this.errorMessage = 'Error al listar libros!';
-      }
+      error: () => alert('Error al listar libros!')
     });
   }
 
-  gotoEdit(bookId: string) {
-    this.router.navigate(['/updatebook', bookId]);
+  filterBooks(): void {
+    if (!this.selectedGenre) {
+      this.displayedBooks = [...this.allBooks];
+    } else {
+      this.displayedBooks = this.allBooks.filter(book => book.genero === this.selectedGenre);
+    }
   }
 
-  gotoDelete(bookId: string) {
-    this.router.navigate(['/deletebook', bookId]);
+  // TRACKBY PARA MANTENER LA ORGANIZACIÓN AL FILTRAR
+  trackByBookId(index: number, book: any): string {
+    return book.id;
+  }
+
+  getProgressClass(progress: number): string {
+    if (progress <= 40) return 'progress-red';
+    if (progress <= 60) return 'progress-orange';
+    if (progress <= 80) return 'progress-yellow';
+    return 'progress-green';
+  }
+
+  gotoEdit(id: string) {
+    this.router.navigate(['/updatebook', id]);
+  }
+
+  gotoDelete(id: string) {
+    this.router.navigate(['/deletebook', id]);
+  }
+
+  openProgressModal(book: any) {
+    this.selectedBook = book;
+    this.newPage = book.currentPage;
+    this.showProgressModal = true;
+  }
+
+  closeProgressModal() {
+    this.showProgressModal = false;
+    this.selectedBook = null;
+    this.newPage = 0;
+  }
+
+  saveProgress() {
+    if (!this.selectedBook) return;
+    this.bookService.updateProgress(this.selectedBook.id, this.newPage).subscribe({
+      next: () => {
+        this.closeProgressModal();
+        this.loadBooks();
+      },
+      error: () => alert("Error al guardar progreso")
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ImageModule } from 'primeng/image';
 import { MenubarModule } from 'primeng/menubar';
@@ -19,12 +19,23 @@ export class HeaderComponent implements OnInit{
 items: MenuItem[] | undefined;
   constructor(private router: Router) { }
 
-  menuVisible: boolean = true;
+  menuVisible: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+    onResize(event: any) {
+      if (event.target.innerWidth > 900) {
+        this.menuVisible = false; // Oculta menú tipo mobile al maximizar
+      }
+    }
 
   toggleMenu() {
   this.menuVisible = !this.menuVisible;
   }
 
+  onItemClick(item: any) {
+    if (item.command) item.command();
+    this.menuVisible = false; // Cierra menú en mobile
+  }
 
 
 
@@ -36,7 +47,7 @@ items: MenuItem[] | undefined;
           route: '/home'
         },
         {
-          label: 'Agregar bibro',
+          label: 'Agregar Libro',
           icon: 'pi pi-plus',
           route: '/addbook'
         },
@@ -50,12 +61,19 @@ items: MenuItem[] | undefined;
           icon: 'pi pi-pencil',
           route: '/updatebook'
         },
+
+         {
+          label: 'Comunidad',
+          icon: 'pi pi-trash',
+          route: '/community'
+        },
+
         {
           label: 'Eliminar libro',
           icon: 'pi pi-trash',
           route: '/deletebook'
         },
-
+  
         {
         label: 'Cerrar sesión',
         icon: 'pi pi-sign-out',

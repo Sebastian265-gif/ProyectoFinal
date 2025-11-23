@@ -1,56 +1,70 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../services/book.service';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { CardModule } from 'primeng/card';
-import { catchError,of } from 'rxjs';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-del-book',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, FormsModule, InputTextModule, MessageModule, CardModule],
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule, MessageModule, CardModule, DropdownModule, DialogModule],
   templateUrl: './del-book.component.html',
-  styleUrl: './del-book.component.css'
+  styleUrls: ['./del-book.component.css']
 })
 export class DelBookComponent {
   deleteForm: FormGroup;
-
-  succesMessage: string = '';
+  successMessage: string = '';
   errorMessage: string = '';
+  bookIds: { label: string; value: string }[] = [];
+  displayModal: boolean = false;
 
-  constructor(private fb: FormBuilder, private BookService: BookService){
+  private bookToDelete: string = '';
+
+  constructor(private fb: FormBuilder, private bookService: BookService){
     this.deleteForm = this.fb.group({
       bookId: ['', Validators.required],
-    })
+    });
+
+    this.loadBookIds();
   }
 
-  onDelete():void{
-    if(this.deleteForm.valid){
-      this.succesMessage = "";
-      this.errorMessage = "";
+  loadBookIds(): void {
+    this.bookService.idBooks().subscribe((ids: string[]) => {
+      this.bookIds = ids.map(id => ({ label: id, value: id }));
+    });
+  }
 
-      const {bookId} = this.deleteForm.value;
-      this.BookService.deleteBook(bookId).pipe(
-        catchError((err) =>
-        {
-          if (err.status == 200) {
-            return of(null)
-          }
-          throw(err)
-        }
-      )).subscribe({
-        next: () => {
-          this.succesMessage = "Libro Eliminado con exito";
-          this.deleteForm.reset();
-        },
-        error: () => {
-          this.errorMessage = "Hubo un error al eliminar el libro"
-        },
-        complete:() => console.log('Complete'),
-      })
+  confirmDelete(): void {
+    if(this.deleteForm.valid){
+      this.bookToDelete = this.deleteForm.value.bookId;
+      this.displayModal = true;
     }
+  }
+
+  deleteBook(): void {
+    this.displayModal = false;
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    this.bookService.deleteBook(this.bookToDelete).pipe(
+      catchError(err => {
+        if(err.status === 200) return of(null);
+        throw(err);
+      })
+    ).subscribe({
+      next: () => {
+        this.successMessage = 'Libro eliminado con éxito';
+        this.deleteForm.reset();
+      },
+      error: () => {
+        this.errorMessage = 'Hubo un error al eliminar el libro';
+      }
+    });
   }
 }

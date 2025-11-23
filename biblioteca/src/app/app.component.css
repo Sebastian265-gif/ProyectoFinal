@@ -14,7 +14,27 @@
 
 /* Ocultar visualmente header/footer solo en login */
 .hidden-login {
-    visibility: hidden;
+  display: none;
 }
 
+
+
+/* Cuando estamos en la ruta de login */
+.contenido.login-route {
+  grid-row: 1 / 4; /* ocupa todas las filas del grid: header + contenido + footer */
+  height: 100dvh;  /* ocupa toda la ventana */
+}
+
+.login-card:hover {
+  box-shadow: 0 20px 40px rgba(255,191,0,0.3), 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.error-msg {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.error-msg.show {
+  opacity: 1;
+}
 

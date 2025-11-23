@@ -8,3 +8,9 @@ body, html {
     height: 100%;
     margin: 0;
 }
+
+
+body {
+  background: linear-gradient(135deg, #e9ebee 0%, #dce7e3 35%, #cfe2dd 70%, #b8d4cc 100%);
+  margin: 0;
+}

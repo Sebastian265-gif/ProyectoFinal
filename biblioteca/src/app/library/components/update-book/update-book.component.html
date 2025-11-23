@@ -1,61 +1,55 @@
-<div class="p-fluid">
-    <h1>EDITAR LIBRO 2</h1>
-    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
-        <div class="field">
-            <label for="Id">Seleccione un ID</label>
-            <p-dropdown
-                id="Id"
-                [options]="Ids"
-                class="md:w-20rem w-full"
-                containerStyleClass="w-full"
-                placeholder="Id"
-                formControlName="Id"
-                [showClear]="true"
-                (onChange)="onIdChange($event)">
-            </p-dropdown>
-            <div class="error" *ngIf="updateForm.controls['Id'].invalid && updateForm.controls['Id'].touched">
-                El id es necesario!
-            </div>
-        </div>
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <div class="p-fluid">
+    <h1>EDITAR LIBRO</h1>
 
-        <div class="field">
-            <label for="tittle">Titulo</label>
-            <input pInputText type="text" formControlName="tittle" id="tittle" class="w-full">
-            <div class="error" *ngIf="updateForm.controls['tittle'].invalid && updateForm.controls['tittle'].touched">
-                El titulo es necesario!
-            </div>
-        </div>
+    <div class="field">
+      <label for="Id">Seleccione un ID</label>
+      <p-dropdown
+        id="Id"
+        [options]="Ids"
+        placeholder="Seleccionar ID..."
+        formControlName="Id"
+        class="dropdown-full"
+        [showClear]="true"
+        (onChange)="onIdChange($event)">
+      </p-dropdown>
+    </div>
 
-        <div class="field">
-            <label for="author">Autor</label>
-            <input pInputText type="text" formControlName="author" id="author" class="w-full">
-            <div class="error" *ngIf="updateForm.controls['author'].invalid && updateForm.controls['author'].touched">
-                El autor es necesario!
-            </div>
-        </div>
+    <div class="field">
+      <label for="tittle">Título</label>
+      <input pInputText type="text" formControlName="tittle" id="tittle" placeholder="Título del libro" />
+    </div>
 
-        <div class="field">
-            <label for="editorial">Editorial</label>
-            <input pInputText type="text" formControlName="editorial" id="editorial" class="w-full">
-            <div class="error" *ngIf="updateForm.controls['editorial'].invalid && updateForm.controls['editorial'].touched">
-                El editorial es necesario!
-            </div>
-        </div>
+    <div class="field">
+      <label for="author">Autor</label>
+      <input pInputText type="text" formControlName="author" id="author" placeholder="Autor del libro" />
+    </div>
 
-        <div class="field">
-            <label for="pages">Numero de paginas</label>
-            <input pInputText type="number" formControlName="pages" id="pages" class="w-full">
-            <div class="error" *ngIf="updateForm.controls['pages'].invalid && updateForm.controls['pages'].touched">
-                El numero de paginas es necesario!
-            </div>
-        </div>
+    <div class="field">
+      <label for="editorial">Editorial</label>
+      <input pInputText type="text" formControlName="editorial" id="editorial" placeholder="Editorial del libro" />
+    </div>
 
-        <div class="field">
-            <button pButton label="Actualizar información" [disabled]="updateForm.invalid" class="customizeButton"></button>
-            <div class="p-mt-3">
-                <p-message *ngIf="successMessage" severity="success" text="{{successMessage}}"></p-message>
-                <p-message *ngIf="errMessage" severity="error" text="{{errMessage}}"></p-message>
-            </div>
-        </div>
-    </form>
-</div>
+    <div class="field">
+      <label for="pages">Número de páginas</label>
+      <input pInputText type="number" formControlName="pages" id="pages" placeholder="Número de páginas" />
+    </div>
+
+    <div class="field">
+      <label for="cover">Portada actual</label>
+      <div *ngIf="currentCover">
+        <img [src]="currentCover" alt="Portada" class="book-cover" />
+      </div>
+      <input type="file" id="cover" (change)="onFileSelected($event)" accept="image/*" />
+    </div>
+
+    <div class="field">
+      <button pButton label="Actualizar libro" [disabled]="updateForm.invalid" class="customizeButton w-full"></button>
+
+      <div class="p-mt-3">
+        <p-message *ngIf="successMessage" severity="success" text="{{ successMessage }}"></p-message>
+        <p-message *ngIf="errMessage" severity="error" text="{{ errMessage }}"></p-message>
+      </div>
+    </div>
+  </div>
+</form>

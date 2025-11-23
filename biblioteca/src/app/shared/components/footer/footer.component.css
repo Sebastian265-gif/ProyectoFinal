@@ -1,3 +1,47 @@
-.background {
-    background-color: #525B44;
+/* FOOTER */
+.footer {
+  background: linear-gradient(135deg, #003b2e, #005f47);
+    padding: 0.7rem 2rem; /* tamaño pequeño */
+  color: white;
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+  box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+}
+
+/* CONTENEDOR CENTRADO */
+.footer-content {
+  display: flex;
+  justify-content: center;     /* CENTRA horizontal */
+  align-items: center;         /* CENTRA vertical */
+  gap: 2rem;                   /* separa texto e imagen */
+  text-align: center;
+}
+
+.footer-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.footer-extra {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.footer-right img {
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.4));
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 8px;
+  }
 }

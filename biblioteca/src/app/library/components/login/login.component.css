@@ -1,11 +1,170 @@
-.field {
+/* Contenedor principal */
+:host {
   display: flex;
-  flex-direction: column;   /* coloca todo en columna */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #003b2e, #005f47);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
 }
 
-.field small {
-  margin-top: 4px;
-  display: block;           /* fuerza que esté debajo */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* Wrapper del login */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 
+/* Tarjeta login transparente */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem;
+  margin: 1.5 rem auto;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.15); /* Transparente tipo glass */
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* Encabezado */
+.login-header {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+/* Inputs */
+.input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.input-box input {
+  width: 100%;
+  height: 50px;
+  border-radius: 40px;
+  border: 2px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 16px;
+  padding: 0 45px 0 20px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.input-box input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 20px;
+}
+
+/* Botón login */
+.login-button {
+  width: 100%;
+  height: 45px;
+  border-radius: 40px;
+  background: #ffffff;
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Mensajes de error */
+.error-msg {
+  margin-top: 6px;
+  color: #ff4d4f;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Link registro */
+.register-link {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.register-link a {
+  color: #ffbf00;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+.login-card:hover {
+  box-shadow: 0 20px 40px rgba(255,191,0,0.3), 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.input-box i {
+  transition: color 0.3s ease;
+}
+.input-box input:focus + i {
+  color: #ffbf00;
+}
+
+/* Botón "Ir al inicio" */
+/* Botón casa flotante dentro del login-card */
+.home-icon-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+  color: #fff;
+  font-size: 22px;
+}
+
+.home-icon-btn:hover {
+  background: rgba(255,255,255,0.35);
+  box-shadow: 0 0 12px rgba(255,255,255,0.4);
+  transform: scale(1.05);
+}

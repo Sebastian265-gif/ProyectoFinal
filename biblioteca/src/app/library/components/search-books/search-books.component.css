@@ -1,77 +1,305 @@
-.books-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* hasta 4 cartas por fila */
-  gap: 1.5rem;
-  padding: 1rem;
-  justify-items: center; /* centra cada carta en su celda */
+/* ============================= */
+/* CONTENEDOR GENERAL */
+/* ============================= */
+/* Contenedor general para grid */
+.books-grid-container {
+  display: flex;
+  justify-content: center; /* centra el grid */
+  width: 100%;
 }
 
-.book-card-wrapper {
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 30px;
+  padding: 20px 30px;
   width: 100%;
-  max-width: 280px; /* ancho máximo de cada carta */
+  max-width: 1200px;
+  justify-items: center;
+  align-items: start;
+}
+
+.books-container .book-item {
+ 
+  width: 100%; 
+   /* asegura que cada item ocupe su celda */
+  transition: all 0.3s ease;
 }
 
 .book-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 450px; /* altura uniforme */
-  max-height: 450px; /* fuerza altura fija */
-  overflow: hidden; /* evita que el contenido rompa la altura */
+  height: 100%;
 }
 
+/* ============================= */
+/* CARD – estilo general */
+/* ============================= */
+.book-card-wrapper ::ng-deep .p-card {
+  background: rgba(0, 59, 46, 0.12); /* efecto suave en tu gama */
+  border-radius: 18px !important;
+  border: 1px solid rgba(0, 59, 46, 0.23);
+  padding: 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.book-card-wrapper ::ng-deep .p-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* TITULO */
+.book-card-wrapper ::ng-deep .p-card-title {
+  color: #003b2e !important;
+  font-size: 1.6rem !important;
+  font-weight: 700;
+}
+
+/* SUBTITULO (autor) */
+.book-card-wrapper ::ng-deep .p-card-subtitle {
+  color: #005f47 !important;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* ============================= */
+/* IMAGEN DE PORTADA */
+/* ============================= */
 .book-cover {
-  width: 100%;
-  height: 200px;
+  width: 85%;
+  height: auto;
+  margin: 15px auto;
+  display: block;
+  border-radius: 12px;
   object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ============================= */
+/* INFO DEL LIBRO */
+/* ============================= */
 .book-info {
-  flex-grow: 1; /* ocupa el espacio disponible */
-  margin-bottom: 0.5rem;
+  margin-top: 10px;
+  color: #003b2e;
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
-/* Recortar texto largo de manera uniforme */
-.book-info p,
-.book-card [p-header],
-.book-card [p-subheader] {
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  /* Webkit (Chrome, Safari) */
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-
-  /* Compatibilidad estándar */
-  display: box; 
-  box-orient: vertical;
-  line-clamp: 2; /* máximo 2 líneas */
+.book-info strong {
+  color: #005f47;
 }
 
+/* ============================= */
+/* PROGRESS BAR */
+/* ============================= */
+::ng-deep .p-progressbar {
+  height: 20px !important;
+  border-radius: 10px !important;
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+
+::ng-deep .p-progressbar-value {
+  background: linear-gradient(135deg, #003b2e, #005f47) !important;
+  border-radius: 10px !important;
+}
+
+::ng-deep .p-progressbar-label {
+  font-weight: bold;
+  color: white !important;
+}
+
+/* ============================= */
+/* BOTONES */
+/* ============================= */
 .book-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 0.5rem;
+  margin-top: 18px;
 }
 
-/* Responsive para pantallas más pequeñas */
-@media (max-width: 1200px) {
-  .books-container {
-    grid-template-columns: repeat(3, 1fr); /* 3 cartas por fila */
+/* Estilo unificado moderno */
+.book-actions button {
+  border-radius: 20px !important;
+  font-size: 0.88rem !important;
+  padding: 8px 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Colores personalizados */
+.p-button-warning {
+  background: #ffc107 !important;
+  border: none !important;
+  color: #333 !important;
+}
+
+.p-button-danger {
+  background: #e63946 !important;
+  border: none !important;
+}
+
+.p-button-success {
+  background: #008f5a !important; /* Verde más vivo y visible */
+  border: none !important;
+}
+
+/* Hovers */
+.book-actions button:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  transition: 0.2s;
+}
+
+/* ========================= */
+/* BACKDROP */
+/* ========================= */
+.modal-backdrop {
+  position: fixed !important;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999 !important;
+  backdrop-filter: blur(3px);
+}
+
+/* ========================= */
+/* MODAL CARD (Glass Verde) */
+/* ========================= */
+.modal-content {
+  width: 380px;
+  padding: 25px;
+  border-radius: 18px;
+  background: rgba(0, 80, 60, 0.12);
+  backdrop-filter: blur(22px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+  text-align: center;
+  color: white;
+
+  animation: modalPop 0.30s ease-out;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-@media (max-width: 900px) {
-  .books-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 cartas por fila */
-  }
+/* Título */
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  color: #ffffff;
 }
 
-@media (max-width: 600px) {
-  .books-container {
-    grid-template-columns: 1fr; /* 1 carta por fila */
-  }
+/* Subtítulo */
+.modal-content p {
+  margin-bottom: 25px;
+  font-size: 1.05rem;
+  color: #d8f7ed;
 }
+
+/* Input */
+.modal-content input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 25px;
+}
+
+.modal-content input::placeholder {
+  color: #e5fff6;
+}
+
+/* ========================= */
+/* BOTONES DEL MODAL */
+/* ========================= */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-buttons button {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 12px !important;
+  font-weight: bold;
+  color: white;
+  font-size: 0.95rem;
+}
+
+/* Guardar (verde elegante) */
+.modal-buttons .p-button-success {
+  background: linear-gradient(135deg, #00a571, #009160) !important;
+  border: none !important;
+}
+
+/* Cancelar (gris suave) */
+.modal-buttons .p-button-secondary {
+  background: rgba(255,255,255,0.25) !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+/* ============================= */
+/* ============================= */
+/* FILTRO POR GÉNERO */
+/* ============================= */
+.filter-container {
+  display: inline-flex; /* se ajusta al contenido */
+  align-items: center;
+  gap: 12px;
+  margin: 20px 30px 10px 30px;
+  padding: 10px 15px;
+  border-radius: 16px;
+  background: rgba(0, 80, 60, 0.12);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #000000; /* letras negras */
+  flex-wrap: wrap;
+}
+
+
+.filter-container label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #000000; /* letras negras */
+  white-space: nowrap;
+}
+
+.filter-container select {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.25);
+  background: rgba(255,255,255,0.9);
+  color: #000000;
+  font-size: 0.95rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+.filter-container select:hover,
+.filter-container select:focus {
+  background: rgba(255,255,255,1);
+  border-color: #00a571;
+}
+
+
+

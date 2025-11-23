@@ -1,11 +1,191 @@
-.error {
-    color: red;
-    font-size: small;
+/* ============================= */
+/* CONTENEDOR GENERAL */
+.search-card {
+  max-width: 95%;
+  width: 100%;
+  margin: 60px auto;
+  padding: 35px;
+  border-radius: 20px;
+
+  background: rgba(0, 59, 46, 0.10);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
-.customizeButton {
-    background-color: #5A6C57;
-    border: none;
+
+/* ============================= */
+/* CONTROLES DE BÚSQUEDA */
+.search-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center; /* CENTRA el dropdown y botón */
+  flex-wrap: wrap;
 }
-.customizeButton:hover{
-    background-color: #85A98F;
+
+.dropdown-full {
+  flex: 0 0 200px; /* ancho flexible, mantiene scroll interno del dropdown */
+  min-width: 200px; /* asegura ancho mínimo en móviles */ /* permite que el dropdown y botón se acomoden en móviles */
+}
+
+
+/* BOTÓN BUSCAR VERDE */
+.search-btn {
+  flex: 0 0 auto; 
+  background-color: #013220;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #007a50;
+}
+
+/* ============================= */
+/* TABLA CON VIDRIO INTERIOR */
+.transparent-table-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 10px;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+  overflow-x: hidden; /* scroll horizontal eliminado */
+}
+
+/* DATATABLE */
+.transparent-table {
+  width: 100% !important;
+  table-layout: auto; /* columnas se adaptan al contenido */
+  border-radius: 12px;
+  background: transparent;
+}
+
+/* HEADERS */
+:host ::ng-deep .p-datatable-thead > tr > th {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #003b2e !important;
+  padding: 12px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* CELDAS */
+:host ::ng-deep .p-datatable-tbody > tr > td {
+  background: rgba(255,255,255,0.15) !important;
+  padding: 12px;
+  text-align: center;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  word-break: break-word; /* evita que texto largo genere scroll */
+}
+
+/* ROW HOVER */
+:host ::ng-deep .p-datatable-tbody > tr:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transition: 0.2s;
+}
+
+/* IMÁGENES REDIMENSIONABLES */
+.transparent-table img {
+  max-width: 55px;
+  max-height: 75px;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* TEXTO DE PROGRESO */
+.progress-text {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  font-size: 0.75rem;
+  color: #003b2e;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.8rem;
+}
+
+.dropdown-full .p-dropdown {
+  background: rgba(255, 255, 255, 0.15); /* vidrio */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 0.6rem;
+  color: #003b2e;
+  font-weight: 500;
+  transition: 0.3s;
+  height: 40px;
+}
+
+/* Placeholder */
+.dropdown-full .p-dropdown-label {
+  color: rgba(0, 59, 46, 0.7);
+  font-weight: 500;
+}
+
+/* Hover / focus */
+.dropdown-full .p-dropdown:focus {
+  border-color: #00a86b;
+  box-shadow: 0 0 10px rgba(0, 168, 107, 0.3);
+  outline: none;
+}
+
+/* Menú desplegable */
+:host ::ng-deep .p-dropdown-items {
+  background: rgba(255, 255, 255, 0.15); /* mismo vidrio */
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #003b2e;
+  max-height: 200px; /* scroll interno si hay muchos elementos */
+  overflow-y: auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Item del menú */
+:host ::ng-deep .p-dropdown-item {
+  padding: 0.5rem 1rem;
+  transition: 0.2s;
+}
+
+/* Hover en el item */
+:host ::ng-deep .p-dropdown-item:hover {
+  background: rgba(0, 168, 107, 0.2);
+  color: #003b2e;
+}
+
+/* ADAPTACIÓN RESPONSIVE */
+@media (max-width: 768px) {
+  .search-card {
+    padding: 20px;
+  }
+
+  .search-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .transparent-table img {
+    max-width: 45px;
+    max-height: 65px;
+  }
+
+  :host ::ng-deep .p-datatable-thead > tr > th,
+  :host ::ng-deep .p-datatable-tbody > tr > td {
+    padding: 8px;
+  }
 }

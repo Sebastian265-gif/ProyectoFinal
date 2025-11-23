@@ -7,8 +7,20 @@ import { SearchIdBookComponent } from './library/components/search-id-book/searc
 import { LoginComponent } from './library/components/login/login.component';
 import { RegisterComponent } from './library/components/register/register.component';
 import { authGuard } from './library/guards/auth.guard';
+import { LandingComponent } from './library/components/landing/landing.component';
+import { CommunityComponent } from './library/components/community/community.component';
 
 export const routes: Routes = [
+
+    {
+    path: 'landing',
+    component: LandingComponent
+    },
+
+    {
+        path:'community',
+        component:CommunityComponent,
+    },
 
     {
         path:'login',
@@ -58,7 +70,7 @@ export const routes: Routes = [
     },
     {
         path:'',
-        redirectTo:'login',
+        redirectTo:'landing',
         pathMatch:'full'
     }
 ];

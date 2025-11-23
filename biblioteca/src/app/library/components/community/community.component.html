@@ -1,0 +1,46 @@
+<div class="community-container">
+  <h2>Comunidad</h2>
+  <p>Lee las opiniones de otros usuarios y comparte la tuya</p>
+
+  <div class="community-layout">
+    
+    <!-- FORMULARIO PARA AGREGAR OPINIÓN -->
+    <div class="add-opinion-card">
+      <p-card header="Añadir Opinión">
+        <div class="p-field">
+          <textarea
+            pInputTextarea
+            rows="4"
+            placeholder="Escribe tu opinión"
+            [(ngModel)]="newOpinion.comment">
+          </textarea>
+        </div>
+
+        <button
+          pButton
+          type="button"
+          label="Publicar"
+          class="p-button-success"
+          (click)="addOpinion()">
+        </button>
+      </p-card>
+    </div>
+
+    <!-- LISTADO DE OPINIONES -->
+    <div class="opinions-list">
+      <div *ngFor="let op of opinions" class="opinion-card">
+        <p-card>
+          <div class="opinion-header">
+            <span><b>{{ op.userName }}</b></span>
+            <small>{{ op.date | date:'EEEE dd MMM, hh:mm a' }}</small>
+          </div>
+
+          <div class="opinion-body">
+            {{ op.comment }}
+          </div>
+        </p-card>
+      </div>
+    </div>
+
+  </div>
+</div>

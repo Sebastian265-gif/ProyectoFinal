@@ -1,20 +1,45 @@
+<div class="search-container">
+  <div class="search-card">
+    <h1 class="search-title">Eliminar Libro</h1>
 
-<div class="card flex justify-content-center p-fluid">
-    <form [formGroup]="deleteForm" (ngSubmit)="onDelete()">
-        <p-card header="Seleccione ID del Libro">
-            <div class="field">
-                <label for="deleteBookId">ID del Libro</label>
-                <input id="deleteBokkId" pInputText formControlName="bookId"/>
-                <div *ngIf="deleteForm.controls['bookId'].invalid && deleteForm.controls['bookId'].touched" class="error">ID no válido</div>
-            </div>
-            <br>
-            <button type="submit" pButton label="Eliminar Libro" [disabled]="deleteForm.invalid" class="p-button-danger"></button>
-            <div class="p-mt-3">
-                <p-message *ngIf="succesMessage" severity="success" text="{{succesMessage}}"></p-message>
-                <p-message *ngIf="errorMessage" severity="error" text="{{errorMessage}}"></p-message>
-            </div>
-        </p-card>
+    <form [formGroup]="deleteForm" (ngSubmit)="confirmDelete()">
+
+      <div class="search-controls">
+        <p-dropdown
+          id="deleteBookId"
+          [options]="bookIds"
+          placeholder="Seleccionar ID..."
+          [showClear]="true"
+          formControlName="bookId"
+          class="dropdown-full">
+        </p-dropdown>
+
+        <button
+          pButton
+          type="submit"
+          label="Eliminar Libro"
+          class="search-btn p-button-danger"
+          [disabled]="deleteForm.invalid">
+        </button>
+      </div>
+
+      <p *ngIf="deleteForm.controls['bookId'].invalid && deleteForm.controls['bookId'].touched" class="error">
+        ID no válido
+      </p>
+
+      <div class="p-mt-3">
+        <p-message *ngIf="successMessage" severity="success" text="{{successMessage}}"></p-message>
+        <p-message *ngIf="errorMessage" severity="error" text="{{errorMessage}}"></p-message>
+      </div>
     </form>
+  </div>
 </div>
 
-
+<!-- Modal de confirmación -->
+<p-dialog header="Confirmar Eliminación" [(visible)]="displayModal" [modal]="true" [closable]="false">
+  <p>¿Está seguro que desea eliminar este libro?</p>
+  <div class="dialog-buttons">
+    <button pButton type="button" label="Cancelar" (click)="displayModal=false" class="p-button-text"></button>
+    <button pButton type="button" label="Sí, eliminar" class="p-button-danger" (click)="deleteBook()"></button>
+  </div>
+</p-dialog>

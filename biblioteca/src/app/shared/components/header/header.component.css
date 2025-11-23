@@ -1,43 +1,78 @@
-/* ===== TUS ESTILOS ORIGINALES ===== */
+/* HEADER */
 .header {
-    background-color: #85A98F;
+  background: linear-gradient(135deg, #003b2e, #005f47);
+    padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  border-radius: 8px;
 }
 
-.card {
-    filter: drop-shadow(
-        3px 2px 20px rgba(186, 183, 183, 0.8)
-    );
-}
-
+/* LOGO */
 .hola {
-    filter: drop-shadow(
-        0 0 10px rgba(0, 0, 0, 0.8)
-    );
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.5));
+  transition: transform 0.3s ease;
 }
+.hola:hover { transform: scale(1.1); }
 
-/* Botón hamburguesa */
+/* BOTÓN HAMBURGUESA */
 .toggle-btn {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1.7rem;
-    cursor: pointer;
+  display: none;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
 }
 
-/* Ocultar menú cuando se pulse el botón */
-.hidden-menu {
-    display: none !important;
+/* MENU DESKTOP */
+.menu-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
-/* Aumentar tamaño texto blanco de menú */
-.p-menubar .p-menuitem-link span {
-    font-size: 1.15rem;
-    color: white !important;
+.menu-list {
+  display: flex;
+  gap: 25px;
 }
 
-/* Forzar menú en una sola línea */
-.p-menubar-root-list {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 20px;
+.menu-item {
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.20);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .menu-wrapper {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 10px;
+    background: rgba(0,0,0,0.25);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .menu-wrapper.show {
+    display: block;
+  }
+
+  .menu-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .toggle-btn {
+    display: block;
+  }
 }

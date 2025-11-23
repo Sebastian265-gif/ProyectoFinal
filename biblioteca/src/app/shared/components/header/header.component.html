@@ -1,34 +1,31 @@
-<div class="header block p-4 mb-3">
-  <div class="grid align-items-center">
+<div class="header">
 
-    <!-- BOTÓN IZQUIERDA -->
-    <div class="col-2 flex align-items-center justify-content-start">
-      <button class="toggle-btn" (click)="toggleMenu()">
-        <i class="pi pi-bars"></i>
-      </button>
-    </div>
+  <!-- LOGO IZQUIERDA -->
+  <div class="logo">
+    <p-image class="hola" width="70"
+      src="https://images.vexels.com/content/229082/preview/book-circles-logo-82dff4.png">
+    </p-image>
+  </div>
 
-    <!-- MENÚ CENTRO -->
-    <div class="card col-8" [ngClass]="{ 'hidden-menu': !menuVisible }">
-      <p-menubar [model]="items">
-        <ng-template pTemplate="item" let-item>
-          <a [routerLink]="item.route" class="p-menuitem-link"
-             (click)="item.command ? item.command() : null">
-            <span [class]="item.icon"></span>
-            <span class="ml-2">{{ item.label }}</span>
-          </a>
-        </ng-template>
-      </p-menubar>
-    </div>
+  <!-- BOTÓN HAMBURGUESA SOLO MOBILE -->
+  <button class="toggle-btn" (click)="toggleMenu()">
+    <i class="pi pi-bars"></i>
+  </button>
 
-    <!-- LOGO DERECHA -->
-    <div class="col-2 flex align-items-center justify-content-end">
-      <p-image class="hola" width="70"
-        src="https://images.vexels.com/content/229082/preview/book-circles-logo-82dff4.png">
-      </p-image>
+  <!-- MENÚ (NO PRIME MENUBAR → MENÚ PERSONALIZADO) -->
+  <div class="menu-wrapper" [class.show]="menuVisible">
+
+    <div class="menu-list">
+      <a *ngFor="let item of items"
+         [routerLink]="item['route']"
+         (click)="onItemClick(item)"
+         class="menu-item">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </a>
     </div>
 
   </div>
-</div>
 
+</div>
 

@@ -1,0 +1,149 @@
+/* ===========================
+   CONTENEDOR GENERAL
+=========================== */
+.community-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  color: #00251f;
+  font-family: 'Inter', sans-serif;
+}
+
+/* TITULOS */
+.community-container h2 {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: #006c54;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.community-container p {
+  font-size: 1.06rem;
+  margin-top: 5px;
+  opacity: 0.85;
+}
+
+/* ===========================
+   CARD PARA AGREGAR OPINIÓN
+=========================== */
+.add-opinion-card ::ng-deep .p-card {
+  background: rgba(0, 70, 55, 0.17);
+  backdrop-filter: blur(14px);
+  border-radius: 22px !important;
+  padding: 25px !important;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* TEXTAREA */
+.add-opinion-card textarea {
+  width: 100%;
+  border-radius: 14px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid rgba(0, 60, 50, 0.32);
+  background: rgba(255, 255, 255, 0.55);
+  resize: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-opinion-card textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 110, 85, 0.45);
+}
+
+/* BOTÓN PUBLICAR */
+.add-opinion-card button {
+  border-radius: 18px !important;
+  padding: 10px 22px !important;
+  font-size: 1rem !important;
+  font-weight: 600;
+  margin-top: 12px;
+  background: #008f6f !important;
+  border: none !important;
+}
+.add-opinion-card button:hover {
+  background: #00a985 !important;
+}
+
+/* ===========================
+   LISTADO DE OPINIONES
+=========================== */
+.opinions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* CARD DE CADA OPINIÓN */
+.opinion-card ::ng-deep .p-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  border-radius: 20px !important;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 20px !important;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* HEADER DE LA OPINIÓN */
+.opinion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #005f47;
+  font-weight: 600;
+}
+
+.opinion-header small {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+/* TEXTO DEL COMENTARIO */
+.opinion-body {
+  font-size: 1rem;
+  color: #003b2e;
+  line-height: 1.45;
+  opacity: 0.95;
+}
+
+/* Hover suave */
+.opinion-card ::ng-deep .p-card:hover {
+  transform: translateY(-2px);
+  transition: 0.2s;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+/* =====================================
+   DISTRIBUCIÓN DEL FORMULARIO Y LISTADO
+===================================== */
+.community-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 35px;
+  width: 100%;
+}
+
+/* Para que el recuadro de publicar quede fijo arriba al hacer scroll */
+.add-opinion-card {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+/* RESPONSIVO - en móviles se apila */
+@media (max-width: 900px) {
+  .community-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .add-opinion-card {
+    position: relative;
+    top: 0;
+  }
+}

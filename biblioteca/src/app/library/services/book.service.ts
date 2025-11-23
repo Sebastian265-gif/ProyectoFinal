@@ -107,6 +107,60 @@ export class BookService {
     });
   }
 
+  updateBookWithImage(formData: FormData): Observable<any> {
+    const token = localStorage.getItem("token");
+
+    return this.http.put(`${this.apiUrl}/updateBookWithImage/${formData.get("Id")}`, formData, {
+      headers: new HttpHeaders({
+        "Authorization": `Bearer ${token}`
+      })
+    });
+  }
+
+  // ========================================
+// ACTUALIZAR PROGRESO DEL LIBRO
+// ========================================
+updateProgress(id: string, page: number): Observable<any> {
+    const token = localStorage.getItem("token");
+
+    return this.http.put(
+      `${this.apiUrl}/updateProgress/${id}?page=${page}`,
+      {}, // cuerpo vacío
+      {
+        headers: new HttpHeaders({
+          "Authorization": `Bearer ${token}`
+        })
+      }
+    );
+  }
+// ============================
+// OPINIONES COMUNIDAD
+// ============================
+// Obtener todas las opiniones
+getAllOpinions(): Observable<any[]> {
+  const token = localStorage.getItem("token");
+  return this.http.get<any[]>(`https://localhost:7255/api/Opinions`, {
+    headers: { "Authorization": `Bearer ${token}` }
+  });
+}
+
+// Agregar opinión (sin UserName)
+addOpinion(opinion: { comment: string;}): Observable<any> {
+  const token = localStorage.getItem("token");
+  return this.http.post(`https://localhost:7255/api/Opinions`, opinion, {
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+  });
+}
+
+// Calificar opinión
+rateOpinion(rate: { OpinionId: number; Rating: number }): Observable<any> {
+  const token = localStorage.getItem("token");
+  return this.http.post(`https://localhost:7255/api/Opinions/Rate`, rate, {
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
+  });
+}
+
+
 }
 
 

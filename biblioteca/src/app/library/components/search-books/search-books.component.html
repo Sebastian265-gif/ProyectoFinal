@@ -1,26 +1,50 @@
+<!-- FILTRO POR GÉNERO -->
+<div class="filter-container">
+  <label for="filterGenero">Filtrar por género:</label>
+  <select id="filterGenero" [(ngModel)]="selectedGenre" (change)="filterBooks()">
+    <option value="">Todos los géneros</option>
+    <option *ngFor="let genre of genreOptions" [value]="genre.value">{{ genre.label }}</option>
+  </select>
+</div>
+
+<!-- GRID GENERAL -->
 <div class="books-container">
-  <div *ngFor="let book of books" class="book-card-wrapper">
+  <div *ngFor="let book of displayedBooks; trackBy: trackByBookId" class="book-item">
     <p-card [header]="book.tittle" [subheader]="book.author" class="book-card">
-      
-      <!-- Portada -->
       <img *ngIf="book.cover" [src]="book.cover" alt="{{ book.tittle }}" class="book-cover"/>
       <img *ngIf="!book.cover" src="assets/default-cover.png" alt="Sin portada" class="book-cover"/>
-
-      <!-- Información del libro -->
+      
       <div class="book-info">
         <p><strong>ID:</strong> {{ book.id }}</p>
         <p><strong>Editorial:</strong> {{ book.editorial }}</p>
         <p><strong>Páginas:</strong> {{ book.pages }}</p>
+        <p><strong>Leídas:</strong> {{ book.currentPage }} / {{ book.pages }}</p>
+        <p><strong>Género:</strong> {{ book.genero || 'Sin género' }}</p>
       </div>
 
-      <!-- Barra de progreso -->
-      <p-progressBar [value]="book.progress" [showValue]="true" [style]="{'height':'20px'}"></p-progressBar>
+      <p-progressBar [value]="book.progress" [showValue]="true" [style]="{'height':'20px'}" [ngClass]="getProgressClass(book.progress)">
+      </p-progressBar>
 
-      <!-- Acciones -->
       <div class="book-actions">
         <button pButton type="button" label="Editar" class="p-button-warning p-button-sm" (click)="gotoEdit(book.id)"></button>
         <button pButton type="button" label="Eliminar" class="p-button-danger p-button-sm" (click)="gotoDelete(book.id)"></button>
+        <button pButton type="button" label="Progreso" class="p-button-success p-button-sm" (click)="openProgressModal(book)"></button>
       </div>
     </p-card>
+  </div>
+</div>
+
+
+<!-- MODAL PARA ACTUALIZAR PROGRESO -->
+<div class="modal-backdrop" *ngIf="showProgressModal">
+  <div class="modal-content">
+    <h2>Actualizar progreso</h2>
+    <p><strong>{{ selectedBook?.tittle }}</strong></p>
+    <label>¿En qué página vas?</label>
+    <input type="number" [(ngModel)]="newPage" min="0" [max]="selectedBook?.pages" />
+    <div class="modal-buttons">
+      <button pButton label="Guardar" class="p-button-success" (click)="saveProgress()"></button>
+      <button pButton label="Cancelar" class="p-button-secondary" (click)="closeProgressModal()"></button>
+    </div>
   </div>
 </div>

@@ -1,66 +1,181 @@
-/* Contenedor general del formulario */
-.form-container {
-  max-width: 420px;        /* Tamaño ideal de un formulario */
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+/* Contenedor principal centrado */
+.registro-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #003b2e, #005f47); /* opcional, solo fondo general */
+  overflow: hidden;
 }
 
-/* Ajuste visual de cada campo */
-.p-field {
-  margin-bottom: 18px;
-}
-
-/* Evita que los inputs cambien de tamaño */
-input[pInputText],
-p-calendar,
-p-dropdown {
+/* Card flotante, tamaño reducido para espacio */
+.registro-card {
   width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
 }
 
-/* Input siempre del mismo tamaño */
-input[pInputText] {
-  height: 40px;
-  padding: 8px 12px;
-  box-sizing: border-box;
+/* Animación */
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
-/* Calendario */
-:host ::ng-deep .p-calendar input {
-  height: 40px !important;
-  padding: 8px 12px;
+/* Título */
+.registro-card h1 {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
-/* Dropdown (género) */
-:host ::ng-deep .p-dropdown {
-  width: 100% !important;
-  height: 40px;
+/* Inputs con iconos */
+.input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+
+.input-box input,
+.input-box p-calendar input {
+  width: 100%;
+  height: 42px;
+  padding: 0 40px 0 15px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-box input::placeholder,
+.input-box p-calendar input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Iconos */
+.input-box i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 16px;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.input-box input:focus + i,
+.input-box p-calendar input:focus + i {
+  color: #ffbf00;
 }
 
 /* Mensajes de error */
-.p-error {
-  font-size: 13px;
-  color: #e50000;
+.error-msg {
+  margin-top: 3px;
+  font-size: 0.8rem;
+  color: #ff4d4f;
+  text-align: left;
 }
 
-/* Botón */
-button[pbutton] {
+/* Botón registro */
+.registro-btn {
   width: 100%;
-  height: 42px;
-  border-radius: 6px;
+  padding: 10px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #005f47, #008f5a);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Eliminamos animaciones que agrandan contenedores */
-input,
-.p-dropdown,
-.p-calendar {
-  transition: none !important;
+.registro-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
-/* Para evitar que PrimeNG agrande el campo al hacer foco */
-:host ::ng-deep .p-inputtext:focus {
-  box-shadow: 0 0 4px #7da0ff !important;
-  transform: none !important;
+.registro-btn[disabled] {
+  background: #9bb3ac;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .registro-card {
+    padding: 1.5rem;
+  }
+  .registro-card h1 {
+    font-size: 1.4rem;
+  }
+  .input-box input, .input-box p-calendar input {
+    height: 38px;
+  }
+}
+
+/* Personaliza calendario PrimeNG */
+.ui-calendar {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.ui-calendar .ui-inputtext {
+  border-radius: 12px;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.ui-calendar .ui-datepicker {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  color: #003b2e;
+}
+
+.ui-calendar .ui-datepicker .ui-datepicker-title {
+  font-weight: 600;
+}
+
+.links-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.link-btn {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.link-btn:hover {
+  background-color: rgba(255,255,255,0.2);
+  border-color: #ffbf00;
+  color: #ffbf00;
 }

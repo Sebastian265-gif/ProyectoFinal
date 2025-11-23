@@ -1,4 +1,83 @@
+/* CONTENEDOR */
+.search-card {
+  max-width: 520px;
+  margin: 60px auto;
+  padding: 35px;
+  border-radius: 20px;
+  background: rgba(0, 59, 46, 0.10);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* CONTROLES */
+.search-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dropdown-full .p-dropdown {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.4rem 0.6rem;
+  color: #003b2e;
+  font-weight: 500;
+  height: 40px;
+}
+
+.dropdown-full .p-dropdown-label {
+  color: rgba(0, 59, 46, 0.7);
+}
+
+.dropdown-full .p-dropdown:focus {
+  border-color: #00a86b;
+  box-shadow: 0 0 10px rgba(0,168,107,0.3);
+}
+
+:host ::ng-deep .p-dropdown-items {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+:host ::ng-deep .p-dropdown-item:hover {
+  background: rgba(0,168,107,0.2);
+}
+
+/* BOTÓN */
+.search-btn {
+  background-color: #013220;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #007a50;
+}
+
+/* ERROR */
 .error {
-    color: red;
-    font-size: small;
+  color: red;
+  font-size: small;
+}
+
+/* MODAL */
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
